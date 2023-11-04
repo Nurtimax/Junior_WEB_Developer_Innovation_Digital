@@ -3,8 +3,8 @@ import { FC } from "react";
 import { ICardGraphList } from "../../../types/cardGraph";
 
 interface IGithubGraphCard {
-  startTitle: string;
-  endTitle: string;
+  startTitle?: string;
+  endTitle?: string;
   list: ICardGraphList[];
 }
 
