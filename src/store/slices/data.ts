@@ -8,6 +8,8 @@ const name = "data";
 
 const initialState: InitialStateData = {
   data: {},
+  loading: false,
+  error: false,
 };
 
 export const getDataThunk = createAsyncThunk(
@@ -29,11 +31,21 @@ const slice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getDataThunk.fulfilled, (state, actions) => {
-      const data = actions.payload;
+    builder
+      .addCase(getDataThunk.fulfilled, (state, actions) => {
+        const data = actions.payload;
 
-      state.data = data;
-    });
+        state.data = data;
+        state.error = false;
+        state.loading = false;
+      })
+      .addCase(getDataThunk.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      })
+      .addCase(getDataThunk.pending, (state) => {
+        state.loading = true;
+      });
   },
 });
 

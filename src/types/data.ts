@@ -8,6 +8,8 @@ export type MonthData = {
 
 export interface InitialStateData {
   data: DateData;
+  loading: boolean;
+  error: boolean;
 }
 
 export interface Month {
