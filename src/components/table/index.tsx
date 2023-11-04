@@ -1,9 +1,10 @@
-import { Table, TableContainer, Paper, Box, Typography } from "@mui/material";
+import { Table, TableContainer, Paper } from "@mui/material";
 import { useAppSelector } from "../../hooks/redux";
 import { selectorData } from "../../store/slices/data";
 import { memo } from "react";
 import TableHead from "./TableHead";
 import Body from "./Body";
+import { GithubGraphCard } from "../UI";
 
 const DataTable = memo(() => {
   const { data, loading } = useAppSelector((state) => selectorData(state));
@@ -25,50 +26,15 @@ const DataTable = memo(() => {
         <TableHead />
         <Body />
       </Table>
-      <Box pt={1} display="flex" alignItems="center" gap={0.2}>
-        <Typography sx={{ fontSize: "12px" }}>Less</Typography>
-        <Box
-          sx={{
-            width: "10px",
-            height: "10px",
-            borderRadius: "2px",
-            border: "1px solid #2424248a",
-          }}
-        />
-        <Box
-          sx={{
-            width: "10px",
-            height: "10px",
-            background: "#0e4429",
-            borderRadius: "2px",
-          }}
-        />
-        <Box
-          sx={{
-            width: "10px",
-            height: "10px",
-            background: "#006d32",
-            borderRadius: "2px",
-          }}
-        />
-        <Box
-          sx={{
-            width: "10px",
-            height: "10px",
-            background: "#26a641",
-            borderRadius: "2px",
-          }}
-        />
-        <Box
-          sx={{
-            width: "10px",
-            height: "10px",
-            background: "#39d353",
-            borderRadius: "2px",
-          }}
-        />
-        <Typography sx={{ fontSize: "12px" }}>More</Typography>
-      </Box>
+      <GithubGraphCard
+        list={[
+          { color: "#b6b9b7", id: 1 },
+          { color: "#0e4429", id: 2 },
+          { color: "#006d32", id: 3 },
+          { color: "#26a641", id: 4 },
+          { color: "#39d353", id: 5 },
+        ]}
+      />
     </TableContainer>
   );
 });
