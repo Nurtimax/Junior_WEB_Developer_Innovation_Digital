@@ -9,9 +9,25 @@ export const createCalendarGrid = (date: DateData): Month[][] => {
 
   const getMax = Math.max(...maxObject);
 
-  const array = newDate.reduce((acc, curr) => {
+  const array = newDate.reduce((acc, curr, i) => {
     const day = new Date(curr.date).getDay();
     const alpha = curr.value / getMax;
+
+    if (i === 0 && day > 1) {
+      const dummyArray = [...Array(day - 1)];
+
+      const reversedIndexes = dummyArray.map((_, i) => i + 1).reverse();
+
+      reversedIndexes.forEach((index, i) => {
+        const dayBefore = new Date(
+          new Date(curr.date).getTime() - 24 * index * 60 * 60 * 1000
+        )
+          .toISOString()
+          .split("T")[0];
+
+        acc[i]?.push({ date: dayBefore, value: 0, alpha } as never);
+      });
+    }
 
     acc[day === 0 ? 6 : day - 1]?.push({ ...curr, alpha } as never);
 

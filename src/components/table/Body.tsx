@@ -10,8 +10,6 @@ const Body = () => {
 
   const array = createCalendarGrid(data);
 
-  console.log(array);
-
   return (
     <TableBody sx={{ border: "none" }}>
       {array.map((el, i) => (
